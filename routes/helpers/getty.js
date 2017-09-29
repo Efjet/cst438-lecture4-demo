@@ -30,14 +30,21 @@ function makeApiRequest(sendBackResponseToBrowser) {
             console.log("status code: " + this.statusCode); 
             //console.log("Complete response: " + apiResponse); 
             /*execute callback*/
-            var responseJSON = JSON.parse(apiResponse); 
-            var images = responseJSON.images; 
+            var imageURI = null;
+            var error = null;
+            if (this.statusCode == "200") {
+                var responseJSON = JSON.parse(apiResponse); 
+                var images = responseJSON.images;
+                imageURI = images[3].display_sizes[0].uri; 
+            } else {
+                error = apiResponse; 
+            }
+ 
             // console.log(responseJSON); 
             // console.log("num images: " + images.length); 
             // console.log("url of first image: " + images[0].display_sizes[0].uri); 
-            var imageURI = images[3].display_sizes[0].uri; 
             
-            sendBackResponseToBrowser(null, imageURI); 
+            sendBackResponseToBrowser(error, imageURI); 
             
         }); 
     }).on("error", function(e) {

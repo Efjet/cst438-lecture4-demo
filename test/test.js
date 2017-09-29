@@ -55,12 +55,19 @@ describe("Getty api call", function() {
         
         getty.makeApiRequest(function(error, imgURI) {
             //console.log("tweets: " + tweets.length); 
-            console.log("imageURI: " + imgURI); 
+            console.log("error: " + error); 
             
-            expect(imgURI).to.not.be.a('null'); 
+            expect(error).to.be.a('null');
             done(); 
         });
-    }); 
+    });
+    it("should return a img URI", function(done) {
+        getty.makeApiRequest(function(error, imgURI) {
+            //console.log("tweets: " + tweets.length); 
+            expect(imgURI).to.be.a('string'); 
+            done(); 
+        });
+    });
     
     
     
