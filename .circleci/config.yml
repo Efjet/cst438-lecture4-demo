@@ -1,4 +1,4 @@
-version: 2
+fir version: 2
 jobs:
    build:
      working_directory: ~/cst438-lecture4-demo
@@ -19,7 +19,7 @@ jobs:
           paths:
             - ./node_modules
       - run:
-          name: test
+          name: Test
           command: './node_modules/.bin/mocha'
      branches:
       only:
